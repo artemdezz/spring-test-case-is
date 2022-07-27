@@ -7,6 +7,8 @@ import ru.is.testcase.dto.InputSquareDto;
 import ru.is.testcase.exception.MagicSquareException;
 import ru.is.testcase.model.InputSquare;
 import ru.is.testcase.repositories.InputSquareRepository;
+
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -134,9 +136,15 @@ public class MagicSquareService {
             throw new MagicSquareException("Заполните все ячейки");
         }
 
+        String saveSquare = inputSquare.stream()
+                .map(Object::toString).collect(Collectors.joining(","));
+
+        if(inputSquareRepository.findByInputArray(saveSquare) != null){
+            throw new MagicSquareException("Данный квадрат уже существует в Базе данных");
+        }
+
         InputSquare magicSquare = new InputSquare();
-        magicSquare.setInputArray(inputSquare.stream().map(Object::toString)
-                .collect(Collectors.joining(",")));
+        magicSquare.setInputArray(saveSquare);
         inputSquareRepository.save(magicSquare);
         return "Сохранено";
     }

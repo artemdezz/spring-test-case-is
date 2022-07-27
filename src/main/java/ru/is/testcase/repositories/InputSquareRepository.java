@@ -6,4 +6,5 @@ import ru.is.testcase.model.InputSquare;
 
 @Repository
 public interface InputSquareRepository extends JpaRepository<InputSquare, Long> {
+    InputSquare findByInputArray(String inputArray);
 }
