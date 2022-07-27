@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <script>
+    function selectTask(){
+      let e = document.querySelector('.choose-task').value
+      if(e == "substrings"){
+        window.location.href = 's';
+      } else if(e == "magicSquare"){
+        window.location.href = 'm';
+      } else{
+        window.location.href = '';
+      }
+    }
+  </script>
+
+  <style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+
+    .cell{
+      width: 15px;
+    }
+
+  </style>
+
+</head>
+<body>
+  <!--  Выбор задания-->
+  <select class="choose-task" onchange="selectTask()">
+    <option value=""></option>
+    <option value="substrings">Substrings</option>
+    <option value="magicSquare">Magic Square</option>
+  </select>
+
+  <!--  Подстроки -->
+  <div th:if="'substrings' == ${meal}">
+    <form method="post">
+      <input type="text" name="currency1" placeholder="массив а1 ">
+      <input type="text" name="currency2" placeholder="массив а2">
+      <button type="submit">Конвертировать</button>
+    </form>
+  </div>
+
+  <!--  Магический квадрат -->
+  <div th:if="'magicsquare' == ${meal}">
+    <form action="#" th:action="@{/m}" method="post" th:object="${inputSquare}">
+      <p>Заполните квадрат</p>
+      <table>
+        <tr>
+          <td><input class="cell" type="number" name="ceil_00"></td>
+          <td><input class="cell" type="number" name="ceil_01"></td>
+          <td><input class="cell" type="number" name="ceil_02"></td>
+        </tr>
+        <tr>
+          <td><input class="cell" type="number" name="ceil_10"></td>
+          <td><input class="cell" type="number" name="ceil_11"></td>
+          <td><input class="cell" type="number" name="ceil_12"></td>
+        </tr>
+        <tr>
+          <td><input class="cell" type="number" name="ceil_20"></td>
+          <td><input class="cell" type="number" name="ceil_21"></td>
+          <td><input class="cell" type="number" name="ceil_22"></td>
+        </tr>
+      </table>
+      <button type="submit">Посчитать</button>
+    </form>
+
+    <table>
+      <tr>
+        <td th:text="${ceil0}"></td>
+        <td th:text="${ceil1}"></td>
+        <td th:text="${ceil2}"></td>
+      </tr>
+      <tr>
+        <td th:text="${ceil3}"></td>
+        <td th:text="${ceil4}"></td>
+        <td th:text="${ceil5}"></td>
+      </tr>
+      <tr>
+        <td th:text="${ceil6}"></td>
+        <td th:text="${ceil7}"></td>
+        <td th:text="${ceil8}"></td>
+      </tr>
+      <p th:text="${minCost}"></p>
+    </table>
+
+  </div>
+
+</body>
+</html>
+
+
+<!--<form enctype="multipart/form-data" method="post" th:action="@{/selectfile}"-->
+<!--      th:object="${selectfile}">-->
+<!--  <p>-->
+<!--    <input type="file" name="file" />-->
+<!--  </p>-->
+<!--  <p>-->
+<!--    <input type="submit" value="Отправить" />-->
+<!--  </p>-->
+<!--</form>-->
