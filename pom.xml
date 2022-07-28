@@ -12,7 +12,6 @@
     <artifactId>testcase</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>testcase</name>
-    <packaging>war</packaging>
     <description>клиент-серверная ИС</description>
     <properties>
         <java.version>1.8</java.version>
