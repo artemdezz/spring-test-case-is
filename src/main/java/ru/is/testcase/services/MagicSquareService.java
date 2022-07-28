@@ -156,7 +156,7 @@ public class MagicSquareService {
 
     private void checkInputValues(List<Integer> inputSquare){
         int intendedSequence = inputSquare.get(1)-inputSquare.get(0);
-        int currentNumber = intendedSequence;
+        int currentNumber = inputSquare.get(0);
         for (Integer in: inputSquare){
             if(in-currentNumber==0){
                 currentNumber += intendedSequence;
